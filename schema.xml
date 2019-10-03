@@ -1,0 +1,50 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<database name="chat">
+<table name="user" phpName="User">
+<column name="username" type="varchar" size="15" required="true" primaryKey="true"/>
+<column name="realname" type="varchar" size="35" required="true"/>
+<column name="passwort" type="char" size="40" required="true"/>
+<column name="alter" type="integer" required="true"/>
+<vendor type="mysql">
+<parameter name="Engine" value="InnoDB"/>
+</vendor>
+</table>
+<table name="messages" phpName="Messages">
+<column name="id" type="integer" size="15" required="true" primaryKey="true" autoIncrement="true"/>
+<column name="username" type="varchar" size="15" required="true"/>
+<column name="body" type="longvarchar" required="true"/>
+<column name="msubject" type="varchar" size="100" required="true"/>
+<column name="mpriority" type="boolean" required="true"/>
+<foreign-key foreignTable="user">
+<reference local="username" foreign="username"/>
+</foreign-key>
+<vendor type="mysql">
+<parameter name="Engine" value="InnoDB"/>
+</vendor>
+</table>
+<table name="receives" phpName="Receives">
+<column name="username" type="varchar" size="15" required="true" primaryKey="true"/>
+<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+<column name="timest" type="timestamp" required="true" primaryKey="true"/>
+<foreign-key foreignTable="user">
+<reference local="username" foreign="username"/>
+</foreign-key>
+<foreign-key foreignTable="messages">
+<reference local="id" foreign="id"/>
+</foreign-key>
+<vendor type="mysql">
+<parameter name="Engine" value="InnoDB"/>
+</vendor>
+</table>
+<table name="ressource" phpName="Ressource">
+<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+<column name="msgid" type="integer" required="true"/>
+<column name="url" type="varchar" size="255" required="true"/>
+<foreign-key foreignTable="messages">
+<reference local="msgid" foreign="id"/>
+</foreign-key>
+<vendor type="mysql">
+<parameter name="Engine" value="InnoDB"/>
+</vendor>
+</table>
+</database>
